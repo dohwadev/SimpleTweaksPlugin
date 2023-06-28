@@ -13,16 +13,14 @@ using Action = Lumina.Excel.GeneratedSheets.Action;
 namespace SimpleTweaksPlugin.Utility; 
 
 public class IconManager : IDisposable {
-
-    private readonly DalamudPluginInterface pluginInterface;
     private bool disposed;
     private readonly Dictionary<(int, bool), TextureWrap> iconTextures = new();
     private readonly Dictionary<uint, ushort> actionCustomIcons = new() {
             
     };
 
-    public IconManager(DalamudPluginInterface pluginInterface) {
-        this.pluginInterface = pluginInterface;
+    public IconManager() {
+        
     }
 
     public void Dispose() {
@@ -43,7 +41,7 @@ public class IconManager : IDisposable {
             try {
                 var iconTex = GetIcon(iconId, hq);
 
-                var tex = pluginInterface.UiBuilder.LoadImageRaw(iconTex.GetRgbaImageData(), iconTex.Header.Width, iconTex.Header.Height, 4);
+                var tex = Service.PluginInterface.UiBuilder.LoadImageRaw(iconTex.GetRgbaImageData(), iconTex.Header.Width, iconTex.Header.Height, 4);
 
                 if (tex.ImGuiHandle != IntPtr.Zero) {
                     this.iconTextures[(iconId, hq)] = tex;
@@ -80,9 +78,6 @@ public class IconManager : IDisposable {
                 break;
             case ClientLanguage.French:
                 type = "fr/";
-                break;
-            case ClientLanguage.Korean:
-                type = "ko/";
                 break;
             default:
                 throw new ArgumentOutOfRangeException("Language", "Unknown Language: " + Service.Data.Language.ToString());

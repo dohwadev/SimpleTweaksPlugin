@@ -2,6 +2,7 @@
 using Dalamud;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
+using SimpleTweaksPlugin.Utility;
 
 namespace SimpleTweaksPlugin.Tweaks.Chat; 
 
@@ -17,7 +18,6 @@ public class ReplyChannelSwitch : ChatTweaks.SubTweak {
             ClientLanguage.English => @"“/r” requires a valid string.",
             ClientLanguage.German => @"Das Textkommando „/r“ erfordert den Unterbefehl [Name/Eingabe] an 1. Stelle.",
             ClientLanguage.French => @"L'argument “nom” est manquant (/r).",
-            ClientLanguage.Korean => @"“/r” requires a valid string.",
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -28,7 +28,7 @@ public class ReplyChannelSwitch : ChatTweaks.SubTweak {
     private void CheckMesssage(XivChatType type, uint senderId, ref SeString sender, ref SeString message, ref bool isHandled) {
         if (type != XivChatType.ErrorMessage) return;
         if (message.TextValue == searchString) {
-            Plugin.XivCommon.Functions.Chat.SendMessage("/t <r>");
+            ChatHelper.SendMessage("/t <r>");
             isHandled = true;
         }
     }

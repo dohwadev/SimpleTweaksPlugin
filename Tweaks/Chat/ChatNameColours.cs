@@ -93,7 +93,6 @@ public unsafe class ChatNameColours : ChatTweaks.SubTweak {
             GetRegion(2, "NA"),
             GetRegion(3, "EU"),
             GetRegion(4, "OCE"),
-            GetRegion(5, "KR"),
         };
         
         base.Setup();

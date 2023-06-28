@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+﻿using FFXIVClientStructs.FFXIV.Common.Math;
+
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::Object
 // base class for all graphics objects
 

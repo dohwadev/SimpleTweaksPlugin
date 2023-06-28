@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3BB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3BC0)]
 public unsafe partial struct EventFramework
 {
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
@@ -18,7 +18,7 @@ public unsafe partial struct EventFramework
     [FieldOffset(0x33B8)] public EventState EventState1;
     [FieldOffset(0x3418)] public EventState EventState2;
 
-    [StaticAddress("48 8B 35 ?? ?? ?? ?? 0F B6 EA 4C 8B F1", isPointer: true)]
+    [StaticAddress("48 8B 35 ?? ?? ?? ?? 0F B6 EA 4C 8B F1", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 8D 43")]
@@ -31,14 +31,19 @@ public unsafe partial struct EventFramework
     public partial PublicContentDirector* GetPublicContentDirector();
 
     public InstanceContentDeepDungeon* GetInstanceContentDeepDungeon() {
-	    var dir = GetInstanceContentDirector();
-	    return dir != null && dir->InstanceContentType == 9 ? (InstanceContentDeepDungeon*)dir : null;
+	    var director = (EventHandler*)GetContentDirector();
+	    if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
+		    return null;
+	    var instanceDirector = (InstanceContentDirector*)director;
+	    if (instanceDirector->InstanceContentType != 9)
+		    return null;
+	    return (InstanceContentDeepDungeon*)director;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C9 0F B6 D9")]
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 86", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 86")]
     public static partial uint GetCurrentContentId();
 }

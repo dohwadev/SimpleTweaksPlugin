@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics;
+﻿using FFXIVClientStructs.FFXIV.Common.Math;
+
+namespace FFXIVClientStructs.FFXIV.Client.Graphics;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public struct Ray {

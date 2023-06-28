@@ -58,6 +58,7 @@ public enum EventHandlerType : ushort {
 	InstanceContentGuide = 0x001D,
 	HousingAethernet = 0x001E,
 	FcTalk = 0x001F,
+	MobHunt = 0x0020,
 	Adventure = 0x0021,
 	DailyQuestSupply = 0x0022,
 	TripleTriad = 0x0023,
@@ -73,6 +74,7 @@ public enum EventHandlerType : ushort {
 	CompanyLeveDirector = 0x8007,
 	TreasureHuntDirector = 0x8009,
 	GoldSaucerDirector = 0x800A,
+	CompanyCraftDirector = 0x800B,
 	DpsChallengeDirector = 0x800D,
 	FateDirector = 0x801A
 }

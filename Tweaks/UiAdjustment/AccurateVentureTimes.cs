@@ -114,12 +114,6 @@ public unsafe class AccurateVentureTimes : UiAdjustments.SubTweak {
                                     timeString.Add($"{tSpan.Seconds}s");
                                     ventureText->SetText($"Fin de la tâche dans {string.Join(' ', timeString)}");
                                     break;
-                                case ClientLanguage.Korean:
-                                    if (tSpan.Hours > 0) timeString.Add($"{tSpan.Hours}h");
-                                    if (tSpan.Minutes > 0) timeString.Add($"{tSpan.Minutes}m");
-                                    timeString.Add($"{tSpan.Seconds}s");
-                                    ventureText->SetText($"Complete in {string.Join(' ', timeString)}");
-                                    break;
                                 case ClientLanguage.English:
                                 default:
                                     if (tSpan.Hours > 0) timeString.Add($"{tSpan.Hours}h");
